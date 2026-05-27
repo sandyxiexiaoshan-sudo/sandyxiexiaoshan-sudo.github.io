@@ -1,0 +1,50 @@
+import { useState } from 'react'
+import type { CaseSlide as CaseSlideType } from '@/types/case'
+import { slideImagePath } from '@/data/cases'
+
+type CaseSlideProps = {
+  slug: string
+  slide: CaseSlideType
+  index: number
+  projectTitle: string
+}
+
+export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) {
+  const [loaded, setLoaded] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const src = slideImagePath(slug, slide.id)
+
+  const slideLabel = `${projectTitle} · ${String(index + 1).padStart(2, '0')}`
+
+  return (
+    <section
+      id={`slide-${slide.id}`}
+      className="scroll-mt-20 snap-start px-4 py-6 md:px-8 md:py-10"
+      aria-label={slideLabel}
+    >
+      <div className="mx-auto max-w-[1600px]">
+        <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[var(--color-card-bg)] shadow-2xl">
+          {!failed ? (
+            <img
+              src={src}
+              alt={slideLabel}
+              className={`block h-auto w-full transition-opacity duration-300 ${
+                loaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              loading={index < 2 ? 'eager' : 'lazy'}
+              onLoad={() => setLoaded(true)}
+              onError={() => setFailed(true)}
+            />
+          ) : null}
+          {(!loaded || failed) && (
+            <div className="absolute inset-0 flex min-h-[320px] flex-col items-center justify-center gap-3 bg-[var(--color-card-bg)] p-8 text-center">
+              <p className="text-sm text-[var(--color-text-muted)]">
+                {failed ? '运行 npm run sync:figma 导出画板图片' : '加载中…'}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

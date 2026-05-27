@@ -1,0 +1,50 @@
+{
+  "fileKey": "PTSrG96cG7WoDsxUndH0rT",
+  "cases": [
+    {
+      "slug": "autel-enterprise",
+      "slides": [
+        { "id": "00", "nodeId": "1:1330" },
+        { "id": "01", "nodeId": "1:1290" },
+        { "id": "02", "nodeId": "1:1250" },
+        { "id": "03", "nodeId": "1:1105" },
+        { "id": "04", "nodeId": "1:728" },
+        { "id": "05", "nodeId": "1:867" },
+        { "id": "06", "nodeId": "1:1364" },
+        { "id": "07", "nodeId": "1:676" },
+        { "id": "08", "nodeId": "1:1564" },
+        { "id": "09", "nodeId": "1:1468" },
+        { "id": "10", "nodeId": "1:1529" },
+        { "id": "11", "nodeId": "1:1601" },
+        { "id": "12", "nodeId": "1:1627" },
+        { "id": "13", "nodeId": "1:1671" },
+        { "id": "14", "nodeId": "1:992" },
+        { "id": "15", "nodeId": "1:1775" },
+        { "id": "16", "nodeId": "1:1695" },
+        { "id": "17", "nodeId": "1:1738" },
+        { "id": "18", "nodeId": "1:1808" },
+        { "id": "19", "nodeId": "1:1847" },
+        { "id": "20", "nodeId": "1:1887" },
+        { "id": "21", "nodeId": "1:1930" }
+      ]
+    },
+    {
+      "slug": "autel-mapper",
+      "slides": [
+        { "id": "00", "nodeId": "1:4597" },
+        { "id": "01", "nodeId": "1:4539" },
+        { "id": "02", "nodeId": "1:4626" },
+        { "id": "03", "nodeId": "1:4651" },
+        { "id": "04", "nodeId": "1:4873" },
+        { "id": "05", "nodeId": "1:4693" },
+        { "id": "06", "nodeId": "1:4746" },
+        { "id": "07", "nodeId": "1:4789" },
+        { "id": "08", "nodeId": "1:4829" }
+      ]
+    }
+  ],
+  "assets": [
+    { "path": "resume/avatar.png", "nodeId": "1:1969" },
+    { "path": "cases/catalog.png", "nodeId": "1:1358" }
+  ]
+}

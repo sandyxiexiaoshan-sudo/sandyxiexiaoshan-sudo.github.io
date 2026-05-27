@@ -1,0 +1,70 @@
+.marketing-page {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  background: #000;
+  color: var(--marketing-text);
+  min-height: 100vh;
+}
+
+.marketing-page::before,
+.marketing-page::after {
+  content: none;
+}
+
+.marketing-muted {
+  color: var(--marketing-muted);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--marketing-text);
+}
+
+.section-label {
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  color: var(--marketing-muted);
+}
+
+.btn-primary {
+  border-radius: 9999px;
+  border: 1px solid var(--marketing-border);
+  background: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border-radius: 9999px;
+  border: 1px solid var(--marketing-border);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--marketing-text);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.surface-card {
+  border: 1px solid var(--marketing-border);
+  background: var(--marketing-surface);
+  backdrop-filter: none;
+}

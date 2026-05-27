@@ -1,0 +1,31 @@
+:root {
+  --color-accent: #ffffff;
+  --color-text-primary: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.62);
+  --color-text-label: rgba(255, 255, 255, 0.48);
+  --color-card-bg: #080808;
+  --color-sidebar-from: #050505;
+  --color-sidebar-to: #000000;
+  --gradient-tag-from: #ffffff;
+  --gradient-tag-to: #d8d8d8;
+  --marketing-bg: #000000;
+  --marketing-text: #ffffff;
+  --marketing-muted: rgba(255, 255, 255, 0.62);
+  --marketing-border: rgba(255, 255, 255, 0.16);
+  --marketing-surface: rgba(255, 255, 255, 0.035);
+}
+
+.bg-figma-radial {
+  background: radial-gradient(
+    ellipse 120% 80% at 3% 0%,
+    #00112c 0%,
+    #030c19 26%,
+    #060606 53%,
+    #000000 75%,
+    #100023 100%
+  );
+}
+
+.bg-sidebar-gradient {
+  background: linear-gradient(163.74deg, var(--color-sidebar-from) 3.67%, var(--color-sidebar-to) 96.33%);
+}

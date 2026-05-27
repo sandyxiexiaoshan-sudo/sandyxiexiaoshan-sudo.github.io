@@ -1,0 +1,90 @@
+export const site = {
+  name: 'sandy xie',
+  nameCn: '谢小珊',
+  title: '高级 UX 设计师',
+  email: '25429157@qq.com',
+  phone: '13510104003',
+  location: '深圳',
+  tagline: 'UX Designer · Smart Hardware · Drone Industry',
+  hero: {
+    paragraphs: [
+      '我是一名拥有多年行业经验的资深UX设计师。',
+      '擅长**硬件端复杂交互设计**，理解专业场景的用户需求，注重**数据驱动的设计验证**。从游戏 UI 到移动端，再到无人机企业级应用，拥有 13 年设计经验。',
+      '我始终相信：**好的设计应该让复杂的硬件变得简单易用**。',
+    ],
+  },
+  aboutIntro:
+    '我专注于智能硬件与无人机行业的用户体验设计，擅长将复杂的专业场景转化为清晰、可验证的交互方案。与产品、硬件、算法团队长期协作，从用户研究到上线迭代形成完整闭环。',
+  stats: [
+    { value: '13+', label: '年设计经验' },
+    { value: '4', label: '年无人机行业' },
+    { value: '3', label: '款核心产品' },
+  ],
+  services: [
+    'UX / UI 设计',
+    '交互设计',
+    '设计系统',
+    '用户研究',
+    '智能硬件',
+    '可用性测试',
+    '信息架构',
+  ],
+  nav: [
+    { label: 'Home', href: '/' },
+    { label: 'Info', href: '/about' },
+    { label: 'Works', href: '/works' },
+    { label: 'Contact', href: '#contact' },
+  ],
+  resumePdfPath: '/resume/sandy-resume.pdf',
+} as const
+
+export const projects = [
+  {
+    slug: 'autel-enterprise',
+    title: 'Autel Enterprise',
+    category: '低空解决方案',
+    subtitle: '遥控器移动端飞行操控软件',
+    year: '2025',
+    coverImage: '/cases/autel-enterprise/00.png',
+  },
+  {
+    slug: 'autel-mapper',
+    title: 'Autel Mapper',
+    category: 'Software',
+    subtitle: 'PC 桌面端工具型软件',
+    year: '2022',
+    coverImage: '/cases/autel-mapper/00.png',
+  },
+  {
+    slug: 'autel-hcjc',
+    title: '环车检测',
+    category: 'UX / UI Design',
+    subtitle: '智能检测平台',
+    year: '2020',
+    coverImage: '/cases/autel-hcjc/00.png',
+  },
+  {
+    slug: 'autel-mdgl',
+    title: '门店管理',
+    category: 'UX / UI Design',
+    subtitle: '汽车门店管理平台',
+    year: '2020',
+    coverImage: '/cases/autel-mdgl/00.png',
+  },
+  {
+    slug: 'autel-wxal',
+    title: '维修案例',
+    category: 'UX / UI Design',
+    subtitle: '汽修交流平台',
+    year: '2021',
+    coverImage: '/cases/autel-wxal/00.png',
+  },
+  {
+    slug: 'Smile to u',
+    title: '麦图花艺',
+    category: 'UX / UI Design',
+    subtitle: '花店管理交易App',
+    year: '2019',
+    coverImage: '/cases/Smile to u/00.png',
+  },
+] as const

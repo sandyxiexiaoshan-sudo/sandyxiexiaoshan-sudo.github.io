@@ -1,0 +1,17 @@
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .bg-figma-radial,
+  .bg-sidebar-gradient {
+    background: white !important;
+  }
+}
