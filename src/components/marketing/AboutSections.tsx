@@ -15,9 +15,15 @@ export function AboutSummary({
       <Reveal>
         <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
           <h2 className="section-label">About me</h2>
-          <p className="text-[20px] leading-snug text-white/85">
-            {site.aboutIntro}
-          </p>
+          <div className="space-y-4 text-[20px] leading-snug text-white/85">
+            {site.aboutIntro.split('\n\n').map((group, groupIndex) => (
+              <div key={groupIndex} className="space-y-2">
+                {group.split('\n').map((paragraph, paragraphIndex) => (
+                  <p key={paragraphIndex}>{paragraph}</p>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </Reveal>
       <div className="mt-16 grid gap-8 md:grid-cols-2 md:gap-x-4">

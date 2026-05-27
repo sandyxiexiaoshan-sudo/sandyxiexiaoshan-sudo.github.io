@@ -68,3 +68,28 @@
   background: var(--marketing-surface);
   backdrop-filter: none;
 }
+
+.marketing-page a.group [class*='backdrop-blur'],
+.marketing-page a.group [class*='backdrop-blur']::before,
+.marketing-page a.group [class*='backdrop-blur']::after,
+.marketing-page a.group [style*='backdrop-filter'],
+.marketing-page a.group [style*='backdrop-filter']::before,
+.marketing-page a.group [style*='backdrop-filter']::after,
+.marketing-page [class*='group/thumb'] *,
+.marketing-page [class*='group/thumb'] *::before,
+.marketing-page [class*='group/thumb'] *::after {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.marketing-page [class*='group/thumb'] span,
+.marketing-page [class*='group/thumb'] button,
+.marketing-page [class*='group/thumb'] [role='button'] {
+  background-color: rgb(0 0 0 / 0.6) !important;
+}
+
+.marketing-page a.group [class*='View'],
+.marketing-page a.group [class*='view'] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}

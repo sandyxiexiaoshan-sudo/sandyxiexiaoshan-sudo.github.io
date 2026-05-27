@@ -36,7 +36,7 @@ export function ProjectCard({ slug, title, subtitle, year, coverImage }: Project
             }}
           />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100">
-            <span className="rounded-md bg-black/60 px-5 py-3 text-sm font-medium text-white shadow-lg">
+            <span className="rounded-md bg-black/60 px-5 py-3 text-sm font-medium text-white shadow-lg [backdrop-filter:none] [-webkit-backdrop-filter:none]">
               View project
             </span>
           </div>

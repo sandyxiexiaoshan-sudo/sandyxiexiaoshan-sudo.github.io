@@ -28,7 +28,7 @@ export function ContactSection() {
             <button type="button" onClick={copy} className="btn-secondary w-fit px-5 py-2.5">
               {copied ? 'Copied' : 'Copy Email'}
             </button>
-            <a href={site.resumePdfPath} download className="btn-primary w-fit px-5 py-2.5">
+            <a href={site.resumePdfPath} download="sandy-resume.pdf" className="btn-primary w-fit px-5 py-2.5">
               下载简历
             </a>
           </Reveal>

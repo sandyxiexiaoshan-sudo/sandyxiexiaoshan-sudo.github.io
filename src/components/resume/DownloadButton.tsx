@@ -58,7 +58,7 @@ export function DownloadButton({ className = '' }: { className?: string }) {
 
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
-      <a href={site.resumePdfPath} download="sandy-resume.png" className={base}>
+      <a href={site.resumePdfPath} download="sandy-resume.pdf" className={base}>
         <Download size={16} />
         下载 PDF 简历
       </a>
