@@ -19,7 +19,7 @@ export const site = {
   stats: [
     { value: '13+', label: '年设计经验' },
     { value: '4', label: '年无人机行业' },
-    { value: '3', label: '款核心产品' },
+    { value: '5', label: '款核心产品' },
   ],
   services: [
     'UX / UI 设计',
@@ -58,14 +58,6 @@ export const projects = [
     coverImage: '/cases/autel-mapper/00.png',
   },
   {
-    slug: 'autel-hcjc',
-    title: '环车检测',
-    category: 'UX / UI Design',
-    subtitle: '车损智能检测工具',
-    year: '2020',
-    coverImage: '/cases/autel-hcjc/00.png',
-  },
-  {
     slug: 'autel-mdgl',
     title: '门店管理',
     category: 'UX / UI Design',
@@ -80,6 +72,14 @@ export const projects = [
     subtitle: '汽修交流平台',
     year: '2021',
     coverImage: '/cases/autel-wxal/00.png',
+  },
+  {
+    slug: 'autel-hcjc',
+    title: '环车检测',
+    category: 'UX / UI Design',
+    subtitle: '车损智能检测工具',
+    year: '2020',
+    coverImage: '/cases/autel-hcjc/00.png',
   },
   {
     slug: 'Smile to u',

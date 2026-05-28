@@ -13,17 +13,22 @@ export function NextWork({ nextStudy }: NextWorkProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start 92%', 'center 52%'],
+    offset: ['start 92%', 'center 70%'],
   })
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 180,
     damping: 32,
     mass: 0.42,
   })
-  const opacity = useTransform(smoothProgress, [0, 1], [0, 1])
-  const y = useTransform(smoothProgress, [0, 1], [120, 0])
-  const rotateX = useTransform(smoothProgress, [0, 1], [-30, 0])
-  const scale = useTransform(smoothProgress, [0, 1], [0.96, 1])
+  const visualProgress = useTransform(smoothProgress, (value) => {
+    if (value >= 0.985) return 1
+    if (value <= 0.015) return 0
+    return value
+  })
+  const opacity = useTransform(visualProgress, [0, 1], [0, 1])
+  const y = useTransform(visualProgress, [0, 1], [120, 0])
+  const rotateX = useTransform(visualProgress, [0, 1], [-30, 0])
+  const scale = useTransform(visualProgress, [0, 1], [0.96, 1])
 
   return (
     <section ref={sectionRef} className="mx-auto max-w-[1882px] px-3 pb-8 pt-32 sm:px-5 md:px-8 md:pt-44">
@@ -35,6 +40,9 @@ export function NextWork({ nextStudy }: NextWorkProps) {
           >
             <div className="mb-4 text-center text-xs text-white [backface-visibility:hidden]">
               <span className="section-label">Next work</span>
+              <h2 className="mt-2 text-2xl font-medium tracking-[-0.04em] text-white md:text-3xl">
+                {nextStudy.title}
+              </h2>
             </div>
 
             <div className="group/thumb relative aspect-video w-full overflow-hidden bg-white/5 [backface-visibility:hidden]">

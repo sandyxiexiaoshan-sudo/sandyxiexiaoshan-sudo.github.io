@@ -2,7 +2,7 @@ import type { CaseStudy } from '@/types/case'
 
 export const autelWxal: CaseStudy = {
   slug: 'autel-wxal',
-  title: 'Autel-维修案例',
+  title: '维修案例',
   subtitle: '',
   year: 'Project',
   coverImage: '/cases/autel-wxal/00.png',

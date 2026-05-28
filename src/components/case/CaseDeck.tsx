@@ -6,7 +6,14 @@ import { projects } from '@/data/site'
 import { CaseSlide } from './CaseSlide'
 import { CaseProgressNav } from './CaseProgressNav'
 import { NextWork } from './NextWork'
-import { caseStudyList } from '@/data/cases'
+import { caseStudies, caseStudyList } from '@/data/cases'
+
+const nextWorkOverrides: Record<string, string> = {
+  'autel-hcjc': 'Smile to u',
+  'autel-mdgl': 'autel-wxal',
+  'autel-wxal': 'autel-hcjc',
+  'Smile to u': 'autel-enterprise',
+}
 
 type CaseDeckProps = {
   study: CaseStudy
@@ -16,7 +23,10 @@ export function CaseDeck({ study }: CaseDeckProps) {
   const [activeId, setActiveId] = useState(study.slides[0]?.id ?? '')
   const currentIndex = caseStudyList.findIndex((item) => item.slug === study.slug)
   const cardSubtitle = projects.find((project) => project.slug === study.slug)?.subtitle ?? study.subtitle
-  const nextStudy = caseStudyList[(currentIndex + 1) % caseStudyList.length] ?? caseStudyList[0]
+  const overrideNextSlug = nextWorkOverrides[study.slug]
+  const nextStudy = overrideNextSlug
+    ? caseStudies[overrideNextSlug]
+    : caseStudyList[(currentIndex + 1) % caseStudyList.length] ?? caseStudyList[0]
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -48,7 +58,7 @@ export function CaseDeck({ study }: CaseDeckProps) {
 
   return (
     <div className="pb-24">
-      <div className="mx-auto max-w-[1600px] px-4 pt-8 md:px-8">
+      <div className="sticky top-[50px] z-30 mx-auto max-w-[1600px] bg-black/80 px-4 pb-5 pt-8 backdrop-blur-md md:px-8">
         <Link
           to="/works"
           className="inline-flex items-center gap-2 text-sm text-[var(--color-text-muted)] transition hover:text-[var(--color-accent)]"

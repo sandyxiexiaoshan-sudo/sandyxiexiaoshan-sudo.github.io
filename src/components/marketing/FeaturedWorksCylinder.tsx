@@ -11,7 +11,7 @@ export function FeaturedWorksCylinder({ projects }: FeaturedWorksCylinderProps) 
   const featuredProjects = projects.slice(0, 6)
 
   return (
-    <div className="grid gap-x-4 gap-y-10 md:grid-cols-2">
+    <div className="grid gap-x-[1.333rem] gap-y-[3.333rem] md:grid-cols-2">
       {featuredProjects.map((project) => (
         <ProjectCard
           key={project.slug}

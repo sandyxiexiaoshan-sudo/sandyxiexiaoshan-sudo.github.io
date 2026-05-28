@@ -7,29 +7,54 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="mx-auto max-w-[1882px] border-t border-white/15 px-3 py-24 sm:px-5 md:px-8">
-      <div className="ml-auto max-w-[909px]">
+      <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
         <Reveal>
-          <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
-            Ready to work together?
-          </h2>
-          <p className="mt-4 max-w-xl text-lg marketing-muted">
-            欢迎就自由职业项目、合作机会或全职岗位与我联系。
-          </p>
+          <h2 className="section-label">Contact</h2>
         </Reveal>
-        <Reveal delay={0.1} className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <a
-            href={`mailto:${site.email}`}
-            className="text-xl font-medium text-[var(--color-accent)] underline-offset-4 hover:underline md:text-2xl"
-          >
-            {site.email}
-          </a>
-          <button type="button" onClick={copy} className="btn-secondary w-fit px-5 py-2.5">
-            {copied ? 'Copied' : 'Copy Email'}
-          </button>
-          <a href={site.resumePdfPath} download="sandy-resume.pdf" className="btn-primary w-fit px-5 py-2.5">
-            下载简历
-          </a>
-        </Reveal>
+        <div>
+          <Reveal>
+            <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
+              Ready to work together?
+            </h2>
+            <p className="mt-4 max-w-xl text-lg marketing-muted">
+              欢迎就自由职业项目、合作机会或全职岗位与我联系。
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.08} className="mt-10">
+            <div className="flex w-fit flex-col gap-4">
+              <div className="w-[168px] overflow-hidden bg-white p-2">
+                <img
+                  src="/resume/weixin.png"
+                  alt="微信二维码"
+                  className="aspect-square w-full object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    const image = e.currentTarget
+                    image.style.display = 'none'
+                    image.parentElement?.classList.add('bg-white/10')
+                    image.parentElement?.setAttribute('aria-label', '请将微信二维码图片放到 public/resume/weixin.png')
+                  }}
+                />
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.14} className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a
+              href={`mailto:${site.email}`}
+              className="text-xl font-medium text-[var(--color-accent)] underline-offset-4 hover:underline md:text-2xl"
+            >
+              {site.email}
+            </a>
+            <button type="button" onClick={copy} className="btn-secondary w-fit px-5 py-2.5">
+              {copied ? 'Copied' : 'Copy Email'}
+            </button>
+            <a href={site.resumePdfPath} download="sandy-resume.pdf" className="btn-primary w-fit px-5 py-2.5">
+              下载简历
+            </a>
+          </Reveal>
+        </div>
       </div>
     </section>
   )

@@ -30,13 +30,17 @@ function ScrollToTop() {
   useLayoutEffect(() => {
     if (hash === '#contact') {
       const scrollToContact = () => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'instant', block: 'end' })
+        const target = document.getElementById('contact')
+        if (!target) return
+
+        const headerOffset = 50
+        const top = target.getBoundingClientRect().top + window.scrollY - headerOffset
+        const shouldJump = window.sessionStorage.getItem('contactNavigationMode') === 'jump'
+        window.sessionStorage.removeItem('contactNavigationMode')
+        window.scrollTo({ top, left: 0, behavior: shouldJump ? 'instant' : 'smooth' })
       }
 
-      requestAnimationFrame(() => {
-        scrollToContact()
-        requestAnimationFrame(scrollToContact)
-      })
+      scrollToContact()
       return
     }
 

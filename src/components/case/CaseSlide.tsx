@@ -23,7 +23,10 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
       aria-label={slideLabel}
     >
       <div className="mx-auto max-w-[1600px]">
-        <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[var(--color-card-bg)] shadow-2xl">
+        <div
+          id={`slide-image-${slide.id}`}
+          className="relative overflow-hidden rounded-lg border border-white/10 bg-[var(--color-card-bg)] shadow-2xl"
+        >
           {!failed ? (
             <img
               src={src}

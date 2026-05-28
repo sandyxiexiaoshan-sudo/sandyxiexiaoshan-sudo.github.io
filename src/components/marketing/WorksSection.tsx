@@ -6,10 +6,12 @@ export function WorksSection({
   showTitle = true,
   className = '',
   reveal = true,
+  revealDelay = 0,
 }: {
   showTitle?: boolean
   className?: string
   reveal?: boolean
+  revealDelay?: number
 }) {
   const featuredProjects = projects.slice(0, 6)
 
@@ -20,5 +22,5 @@ export function WorksSection({
     </section>
   )
 
-  return reveal ? <Reveal>{content}</Reveal> : content
+  return reveal ? <Reveal delay={revealDelay}>{content}</Reveal> : content
 }

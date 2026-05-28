@@ -12,7 +12,7 @@ export function Layout() {
     <div className="marketing-page min-h-screen">
       <Header />
       <main className={isHome ? undefined : 'pt-[50px]'}>
-        <PageTransition>
+        <PageTransition key={location.key}>
           <Outlet />
         </PageTransition>
       </main>

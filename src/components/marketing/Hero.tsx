@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { site } from '@/data/site'
 import { Reveal } from './Reveal'
+import { MarketingNav } from './MarketingNav'
 
 function renderParagraph(text: string) {
   const parts = text.split(/\*\*(.*?)\*\*/g)
@@ -17,6 +18,8 @@ function renderParagraph(text: string) {
 }
 
 export function Hero({ showBody = true }: { showBody?: boolean }) {
+  const location = useLocation()
+  const isContactHash = location.hash === '#contact'
   const navAnchorRef = useRef<HTMLDivElement>(null)
   const [navFixed, setNavFixed] = useState(false)
 
@@ -42,63 +45,51 @@ export function Hero({ showBody = true }: { showBody?: boolean }) {
 
   return (
     <section className="relative mx-auto flex max-w-[1882px] flex-col px-3 pt-4 sm:px-5 md:px-8">
-      <Reveal className="[container-type:inline-size]" direction="down">
-        <h1 className="w-full select-none whitespace-nowrap text-[19cqw] font-black leading-[0.78] tracking-[-0.022em] text-white uppercase">
-          Sandy Xie
+      <Reveal className="[container-type:inline-size]" direction="down" duration={1.1}>
+        <h1 className="flex w-full select-none justify-between whitespace-nowrap text-[19cqw] font-black leading-[0.78] tracking-[-0.022em] text-white uppercase">
+          {'Sandy Xie'.split('').map((char, index) => (
+            <span key={`${char}-${index}`} className={char === ' ' ? 'w-[0.18em]' : undefined}>
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
         </h1>
       </Reveal>
 
-      <div ref={navAnchorRef} className={navFixed ? 'mt-5 h-[50px]' : undefined}>
-        <div className={navClassName}>
-          <Reveal delay={0.58}>
-            <nav className="flex items-center justify-between text-[10px] text-white sm:text-xs">
-              {site.nav.map((item) =>
-                item.href === '#contact' ? (
-                  <a
-                    key={item.label}
-                    href="/#contact"
-                    className="w-fit rounded-full border border-white/15 px-3 py-1 text-white/85 transition hover:border-white/40 hover:text-white"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="w-fit rounded-full border border-white/15 px-3 py-1 text-white/85 transition hover:border-white/40 hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
-            </nav>
-          </Reveal>
+      {!isContactHash && (
+        <div ref={navAnchorRef} className={navFixed ? 'mt-5 h-[50px]' : undefined}>
+          <div className={navClassName}>
+            <Reveal delay={0.55}>
+              <MarketingNav />
+            </Reveal>
+          </div>
         </div>
-      </div>
+      )}
 
-      {showBody && <HeroBodyContent />}
+      {showBody && <HeroBodyContent delay={0.55} />}
     </section>
   )
 }
 
-function HeroBodyContent() {
+function HeroBodyContent({ delay = 0 }: { delay?: number }) {
   return (
-    <div className="grid pt-[160px] pb-[160px] md:grid-cols-2 md:gap-x-4">
-      <div className="w-full pr-[150px] text-left text-[20px] leading-snug text-white/85 md:col-start-2">
-        <div className="space-y-2">
-          {site.hero.paragraphs.map((p, i) => (
-            <p key={i}>{renderParagraph(p)}</p>
-          ))}
+    <Reveal delay={delay}>
+      <div className="grid pt-[160px] pb-[160px] md:grid-cols-2 md:gap-x-4">
+        <div className="w-full pr-[150px] text-left text-[20px] leading-snug text-white/85 md:col-start-2">
+          <div className="space-y-2">
+            {site.hero.paragraphs.map((p, i) => (
+              <p key={i}>{renderParagraph(p)}</p>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Reveal>
   )
 }
 
 function HeroBody() {
   return (
     <div className="mx-auto w-full max-w-[1882px] px-3 sm:px-5 md:px-8">
-      <HeroBodyContent />
+      <HeroBodyContent delay={0.55} />
     </div>
   )
 }

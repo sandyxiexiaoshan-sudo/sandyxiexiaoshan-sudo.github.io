@@ -14,13 +14,18 @@ export function CaseProgressNav({ slides, activeId }: CaseProgressNavProps) {
   }, [activeId])
 
   const scrollTo = (id: string) => {
-    document.getElementById(`slide-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const target = document.getElementById(`slide-image-${id}`) ?? document.getElementById(`slide-${id}`)
+    if (!target) return
+
+    const fixedHeaderOffset = 236
+    const top = target.getBoundingClientRect().top + window.scrollY - fixedHeaderOffset
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
   }
 
   return (
     <>
       <nav
-        className="fixed right-4 top-1/2 z-40 hidden max-h-[70vh] -translate-y-1/2 flex-col gap-1 overflow-y-auto rounded-lg border border-white/10 bg-black/60 p-2 backdrop-blur-md lg:flex"
+        className="fixed right-4 top-1/2 z-40 hidden max-h-[70vh] -translate-y-1/2 flex-col gap-2 overflow-y-auto rounded-lg border border-white/10 bg-black/60 p-2 backdrop-blur-md lg:flex"
         aria-label="章节导航"
       >
         {slides.map((s, i) => (
@@ -29,12 +34,14 @@ export function CaseProgressNav({ slides, activeId }: CaseProgressNavProps) {
             type="button"
             onClick={() => scrollTo(s.id)}
             title={`第 ${i + 1} 屏`}
-            className={`h-2 w-2 rounded-full transition ${
+            className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-medium leading-none transition ${
               activeId === s.id
-                ? 'scale-125 bg-[var(--color-accent)]'
-                : 'bg-white/30 hover:bg-white/60'
+                ? 'scale-125 bg-[var(--color-accent)] text-black'
+                : 'bg-white/30 text-white/80 hover:bg-white/60 hover:text-black'
             }`}
-          />
+          >
+            {i + 1}
+          </button>
         ))}
       </nav>
 
