@@ -11,7 +11,7 @@ type ProjectCardProps = {
 export function ProjectCard({ slug, title, subtitle, year, coverImage }: ProjectCardProps) {
   return (
     <article className="group">
-      <Link to={`/works/${slug}`} className="block text-white">
+      <Link to={`/works/${slug}`} className="block text-white" data-cursor="view">
         <div className="mb-2 flex items-center justify-between gap-3 text-xs text-white">
           <h3 className="min-w-0 truncate font-medium tracking-[-0.03em]">{title}</h3>
           <div className="flex shrink-0 items-center gap-2">
@@ -27,7 +27,9 @@ export function ProjectCard({ slug, title, subtitle, year, coverImage }: Project
           <img
             src={coverImage}
             alt={title}
-            className="h-full w-full object-cover transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.02]"
+            className={`h-full w-full object-cover transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.02] ${
+              slug === 'web' ? 'object-top' : ''
+            }`}
             loading="lazy"
             onError={(e) => {
               const t = e.currentTarget

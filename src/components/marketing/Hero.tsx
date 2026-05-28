@@ -50,49 +50,55 @@ export function Hero({ showBody = true }: { showBody?: boolean }) {
 
       <div ref={navAnchorRef} className={navFixed ? 'mt-5 h-[50px]' : undefined}>
         <div className={navClassName}>
-          <div>
-            <Reveal delay={0.58}>
-              <nav className="flex items-center justify-between text-[10px] text-white sm:text-xs">
-                {site.nav.map((item) =>
-                  item.href === '#contact' ? (
-                    <a
-                      key={item.label}
-                      href="/#contact"
-                      className="w-fit rounded-full border border-white/15 px-3 py-1 text-white/85 transition hover:border-white/40 hover:text-white"
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={item.label}
-                      to={item.href}
-                      className="w-fit rounded-full border border-white/15 px-3 py-1 text-white/85 transition hover:border-white/40 hover:text-white"
-                    >
-                      {item.label}
-                    </Link>
-                  ),
-                )}
-              </nav>
-            </Reveal>
-          </div>
+          <Reveal delay={0.58}>
+            <nav className="flex items-center justify-between text-[10px] text-white sm:text-xs">
+              {site.nav.map((item) =>
+                item.href === '#contact' ? (
+                  <a
+                    key={item.label}
+                    href="/#contact"
+                    className="w-fit rounded-full border border-white/15 px-3 py-1 text-white/85 transition hover:border-white/40 hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="w-fit rounded-full border border-white/15 px-3 py-1 text-white/85 transition hover:border-white/40 hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              )}
+            </nav>
+          </Reveal>
         </div>
       </div>
 
-      {showBody && <HeroBody />}
+      {showBody && <HeroBodyContent />}
     </section>
   )
 }
 
-function HeroBody() {
+function HeroBodyContent() {
   return (
     <div className="grid pt-[160px] pb-[160px] md:grid-cols-2 md:gap-x-4">
-      <div className="w-full text-left text-[20px] leading-snug text-white/85 md:col-start-2">
+      <div className="w-full pr-[150px] text-left text-[20px] leading-snug text-white/85 md:col-start-2">
         <div className="space-y-2">
           {site.hero.paragraphs.map((p, i) => (
             <p key={i}>{renderParagraph(p)}</p>
           ))}
         </div>
       </div>
+    </div>
+  )
+}
+
+function HeroBody() {
+  return (
+    <div className="mx-auto w-full max-w-[1882px] px-3 sm:px-5 md:px-8">
+      <HeroBodyContent />
     </div>
   )
 }

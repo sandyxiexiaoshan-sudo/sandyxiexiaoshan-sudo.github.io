@@ -42,6 +42,46 @@
   transition: opacity 0.2s, transform 0.2s;
 }
 
+.btn-flip {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-flip-label {
+  position: relative;
+  display: block;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: transform 0.42s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.btn-flip-label::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+}
+
+.btn-flip:hover .btn-flip-label {
+  transform: translateY(-100%);
+}
+
+.btn-flip:focus-visible .btn-flip-label {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-flip-label {
+    transition: none;
+  }
+
+  .btn-flip:hover .btn-flip-label,
+  .btn-flip:focus-visible .btn-flip-label {
+    transform: none;
+  }
+}
+
 .btn-primary:hover {
   opacity: 0.82;
   transform: translateY(-1px);

@@ -11,7 +11,7 @@ export function AboutSummary({
   className?: string
 }) {
   return (
-    <section className={`mx-auto max-w-[1882px] px-3 py-24 sm:px-5 md:px-8 ${showTopBorder ? 'border-t border-white/15' : ''} ${className}`}>
+    <section className={`mx-auto max-w-[1882px] px-3 py-16 sm:px-5 md:px-8 ${showTopBorder ? 'border-t border-white/15' : ''} ${className}`}>
       <Reveal>
         <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
           <h2 className="section-label">About me</h2>
@@ -27,7 +27,7 @@ export function AboutSummary({
         </div>
       </Reveal>
       <div className="mt-16 grid gap-8 md:grid-cols-2 md:gap-x-4">
-        <div className="grid gap-6 md:col-start-2 md:grid-cols-2 md:items-end md:gap-x-4">
+        <div className="grid gap-6 md:col-start-2 md:grid-cols-[2fr_1fr] md:items-end md:gap-x-4">
           <Reveal delay={0.08}>
             <div className="aspect-[4/5] overflow-hidden bg-white/10">
               <img
@@ -74,7 +74,13 @@ export function WhatIDo() {
         <div className="flex flex-wrap gap-3">
           {site.services.map((s, i) => (
             <Reveal key={s} delay={i * 0.04}>
-              <span className="inline-flex rounded-full border border-white/15 px-4 py-2 text-[20px] text-white/75">
+              <span
+                className={
+                  s === 'Vide Coding'
+                    ? 'inline-flex rounded-full bg-white/10 px-5 py-2 text-[20px] font-semibold text-white shadow-[0_0_30px_rgba(255,255,255,0.12)]'
+                    : 'inline-flex rounded-full bg-white/10 px-4 py-2 text-[20px] text-white/75'
+                }
+              >
                 {s}
               </span>
             </Reveal>

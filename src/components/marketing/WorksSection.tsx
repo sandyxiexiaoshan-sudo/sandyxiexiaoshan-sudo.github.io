@@ -1,5 +1,5 @@
 import { projects } from '@/data/site'
-import { ProjectCard } from './ProjectCard'
+import { FeaturedWorksCylinder } from './FeaturedWorksCylinder'
 import { Reveal } from './Reveal'
 
 export function WorksSection({
@@ -11,14 +11,12 @@ export function WorksSection({
   className?: string
   reveal?: boolean
 }) {
+  const featuredProjects = projects.slice(0, 6)
+
   const content = (
-    <section className={`mx-auto max-w-[1882px] px-3 pb-20 pt-0 sm:px-5 md:px-8 md:pb-28 md:pt-0 ${className}`}>
-      {showTitle && <h2 className="section-label mb-8">Selected works</h2>}
-      <div className="grid gap-x-4 gap-y-[60px] md:grid-cols-2 md:gap-x-5">
-        {projects.map((p) => (
-          <ProjectCard key={p.slug} {...p} />
-        ))}
-      </div>
+    <section className={`mx-auto max-w-[1882px] px-3 pb-16 pt-0 sm:px-5 md:px-8 md:pb-20 md:pt-0 ${className}`}>
+      {showTitle && <h2 className="section-label mb-16">Selected works</h2>}
+      <FeaturedWorksCylinder projects={featuredProjects} />
     </section>
   )
 

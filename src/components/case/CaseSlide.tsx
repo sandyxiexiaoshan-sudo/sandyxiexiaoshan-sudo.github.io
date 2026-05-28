@@ -12,7 +12,7 @@ type CaseSlideProps = {
 export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) {
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
-  const src = slideImagePath(slug, slide.id)
+  const src = slide.imagePath ?? slideImagePath(slug, slide.id)
 
   const slideLabel = `${projectTitle} · ${String(index + 1).padStart(2, '0')}`
 

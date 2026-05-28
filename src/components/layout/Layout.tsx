@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom'
+import { CustomCursor } from './CustomCursor'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { PageTransition } from './PageTransition'
@@ -16,6 +17,7 @@ export function Layout() {
         </PageTransition>
       </main>
       <Footer />
+      <CustomCursor />
     </div>
   )
 }

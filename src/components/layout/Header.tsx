@@ -20,7 +20,7 @@ export function Header() {
         ? location.pathname === '/'
         : href !== '#contact' && location.pathname.startsWith(href)
     return [
-      'w-fit rounded-full border px-3 py-1 text-[10px] transition sm:text-xs',
+      'btn-flip w-fit rounded-full border px-3 py-1 text-[10px] transition sm:text-xs',
       active
         ? 'border-[var(--color-accent)] text-[var(--color-accent)]'
         : 'border-white/15 text-white/85 hover:border-white/40 hover:text-white',
@@ -38,7 +38,7 @@ export function Header() {
                 href="/#contact"
                 className={linkClass(item.href)}
               >
-                {item.label}
+                <span className="btn-flip-label" data-label={item.label}>{item.label}</span>
               </a>
             ) : (
               <Link
@@ -46,7 +46,7 @@ export function Header() {
                 to={item.href}
                 className={linkClass(item.href)}
               >
-                {item.label}
+                <span className="btn-flip-label" data-label={item.label}>{item.label}</span>
               </Link>
             ),
           )}

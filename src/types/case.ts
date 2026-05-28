@@ -2,6 +2,7 @@ export interface CaseSlide {
   id: string
   nodeId: string
   title: string
+  imagePath?: string
   width?: number
   height?: number
 }

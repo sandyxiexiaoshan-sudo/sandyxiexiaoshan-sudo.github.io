@@ -9,7 +9,7 @@ export function WorksPage() {
           <h1 className="hero-title">Works</h1>
         </Reveal>
       </section>
-      <WorksSection showTitle={false} className="mt-10" />
+      <WorksSection showTitle={false} className="mt-20" />
     </>
   )
 }

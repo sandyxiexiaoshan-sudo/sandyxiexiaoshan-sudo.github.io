@@ -3,7 +3,11 @@ import { autelHcjc } from './autel-hcjc'
 import { autelMapper } from './autel-mapper'
 import { autelMdgl } from './autel-mdgl'
 import { autelWxal } from './autel-wxal'
+import { chahua } from './chahua'
+import { icon } from './icon'
 import { smileToU } from './smile-to-u'
+import { tx } from './tx'
+import { web } from './web'
 import type { CaseStudy } from '@/types/case'
 
 export const caseStudies: Record<string, CaseStudy> = {
@@ -13,15 +17,23 @@ export const caseStudies: Record<string, CaseStudy> = {
   'autel-mdgl': autelMdgl,
   'autel-wxal': autelWxal,
   'Smile to u': smileToU,
+  tx,
+  web,
+  chahua,
+  icon,
 }
 
 export const caseStudyList: CaseStudy[] = [
   autelEnterprise,
-  autelHcjc,
   autelMapper,
   autelMdgl,
+  autelHcjc,
   autelWxal,
   smileToU,
+  web,
+  chahua,
+  icon,
+  tx,
 ]
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
