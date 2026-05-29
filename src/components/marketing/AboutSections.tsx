@@ -64,6 +64,18 @@ export function AboutSummary({
   )
 }
 
+const softwareTools = [
+  { name: 'Figma', icon: '/resume/00.png' },
+  { name: 'Cursor', icon: '/resume/01.png' },
+  { name: 'Github', icon: '/resume/02.png' },
+  { name: 'Gemini', icon: '/resume/03.png' },
+  { name: '豆包', icon: '/resume/04.png' },
+  { name: 'Coze', icon: '/resume/05.png' },
+  { name: '即梦', icon: '/resume/06.png' },
+  { name: '可灵', icon: '/resume/07.png' },
+  { name: 'Sketch', icon: '/resume/08.png' },
+]
+
 export function WhatIDo() {
   return (
     <section className="mx-auto max-w-[1882px] border-t border-white/15 px-3 py-20 sm:px-5 md:px-8">
@@ -91,6 +103,30 @@ export function WhatIDo() {
   )
 }
 
+export function SoftwareTools() {
+  return (
+    <section className="mx-auto max-w-[1882px] border-t border-white/15 px-3 py-20 sm:px-5 md:px-8">
+      <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
+        <Reveal>
+          <h2 className="section-label">Software & AI Tools</h2>
+        </Reveal>
+        <div className="grid grid-cols-3 gap-x-6 gap-y-8 sm:grid-cols-4 lg:grid-cols-6">
+          {softwareTools.map((tool, i) => (
+            <Reveal key={tool.name} delay={i * 0.035}>
+              <div className="flex w-fit flex-col items-center gap-3 text-center">
+                <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-[18px] border border-white/10 bg-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur">
+                  <img src={tool.icon} alt={`${tool.name} icon`} className="h-full w-full object-cover" loading="lazy" />
+                </div>
+                <p className="text-sm text-white/60">{tool.name}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function WorkExperience() {
   return (
     <section className="mx-auto max-w-[1882px] border-t border-white/15 px-3 py-20 sm:px-5 md:px-8">
@@ -98,10 +134,14 @@ export function WorkExperience() {
         <Reveal>
           <h2 className="section-label">Work experience</h2>
         </Reveal>
-        <div className="space-y-0 border-b border-white/15">
+        <div className="space-y-0">
           {resume.experience.map((job, i) => (
             <Reveal key={job.period} delay={i * 0.05}>
-              <div className="grid gap-2 border-t border-white/15 py-6 sm:grid-cols-[1fr_1fr_auto] sm:items-baseline">
+              <div
+                className={`grid gap-2 py-6 sm:grid-cols-[1fr_1fr_auto] sm:items-baseline ${
+                  i === 0 ? '' : 'border-t border-white/15'
+                }`}
+              >
                 <p className="text-xl font-medium tracking-[-0.03em] text-white md:text-2xl">{job.role}</p>
                 <p className="text-sm text-white/55 md:text-base">{job.company}</p>
                 <p className="text-sm text-white/55 md:text-base">{job.period}</p>

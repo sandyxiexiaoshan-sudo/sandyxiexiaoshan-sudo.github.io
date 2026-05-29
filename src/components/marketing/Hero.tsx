@@ -74,7 +74,7 @@ function HeroBodyContent({ delay = 0 }: { delay?: number }) {
   return (
     <Reveal delay={delay}>
       <div className="grid pt-[160px] pb-[160px] md:grid-cols-2 md:gap-x-4">
-        <div className="w-full pr-[150px] text-left text-[20px] leading-snug text-white/85 md:col-start-2">
+        <div className="w-full text-left text-[20px] leading-snug text-white/85 md:col-start-2 md:pr-[150px]">
           <div className="space-y-2">
             {site.hero.paragraphs.map((p, i) => (
               <p key={i}>{renderParagraph(p)}</p>

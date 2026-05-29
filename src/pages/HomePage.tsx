@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'lucide-react'
 import { Hero } from '@/components/marketing/Hero'
 import { WorksSection } from '@/components/marketing/WorksSection'
-import { AboutSummary, WhatIDo, WorkExperience } from '@/components/marketing/AboutSections'
+import { AboutSummary, SoftwareTools, WhatIDo, WorkExperience } from '@/components/marketing/AboutSections'
 import { ContactSection } from '@/components/marketing/ContactSection'
 
 export function HomePage() {
@@ -16,6 +16,7 @@ export function HomePage() {
       <WorksSection reveal={true} revealDelay={0.55} />
       <AboutSummary />
       <WhatIDo />
+      <SoftwareTools />
       <WorkExperience />
       <ContactSection />
       <button

@@ -13,6 +13,7 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
   const src = slide.imagePath ?? slideImagePath(slug, slide.id)
+  const isVideo = /\.(mp4|webm|mov)$/i.test(src)
 
   const slideLabel = `${projectTitle} · ${String(index + 1).padStart(2, '0')}`
 
@@ -28,16 +29,32 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
           className="relative overflow-hidden rounded-lg border border-white/10 bg-[var(--color-card-bg)] shadow-2xl"
         >
           {!failed ? (
-            <img
-              src={src}
-              alt={slideLabel}
-              className={`block h-auto w-full transition-opacity duration-300 ${
-                loaded ? 'opacity-100' : 'opacity-0'
-              }`}
-              loading={index < 2 ? 'eager' : 'lazy'}
-              onLoad={() => setLoaded(true)}
-              onError={() => setFailed(true)}
-            />
+            isVideo ? (
+              <video
+                src={src}
+                className={`block h-auto w-full transition-opacity duration-300 ${
+                  loaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload={index < 2 ? 'auto' : 'metadata'}
+                onLoadedData={() => setLoaded(true)}
+                onError={() => setFailed(true)}
+              />
+            ) : (
+              <img
+                src={src}
+                alt={slideLabel}
+                className={`block h-auto w-full transition-opacity duration-300 ${
+                  loaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                loading={index < 2 ? 'eager' : 'lazy'}
+                onLoad={() => setLoaded(true)}
+                onError={() => setFailed(true)}
+              />
+            )
           ) : null}
           {(!loaded || failed) && (
             <div className="absolute inset-0 flex min-h-[320px] flex-col items-center justify-center gap-3 bg-[var(--color-card-bg)] p-8 text-center">

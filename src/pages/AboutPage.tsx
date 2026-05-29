@@ -1,4 +1,4 @@
-import { AboutSummary, WhatIDo, WorkExperience } from '@/components/marketing/AboutSections'
+import { AboutSummary, SoftwareTools, WhatIDo, WorkExperience } from '@/components/marketing/AboutSections'
 import { ContactSection } from '@/components/marketing/ContactSection'
 
 export function AboutPage() {
@@ -10,6 +10,7 @@ export function AboutPage() {
       </section>
       <AboutSummary showTopBorder={false} className="mt-[70px]" />
       <WhatIDo />
+      <SoftwareTools />
       <WorkExperience />
       <ContactSection />
     </>

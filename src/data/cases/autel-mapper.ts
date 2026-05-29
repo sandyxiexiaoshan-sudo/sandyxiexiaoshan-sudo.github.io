@@ -16,5 +16,7 @@ export const autelMapper: CaseStudy = {
     { id: '06', nodeId: '1:4746', title: '28 核心设计 3' },
     { id: '07', nodeId: '1:4789', title: '28 核心设计 4' },
     { id: '08', nodeId: '1:4829', title: '28 核心设计 5' },
+    { id: '09', nodeId: 'autel-mapper-09', title: '29 核心设计 6' },
+    { id: '10', nodeId: 'autel-mapper-10', title: '30 核心设计 7' },
   ],
 }
