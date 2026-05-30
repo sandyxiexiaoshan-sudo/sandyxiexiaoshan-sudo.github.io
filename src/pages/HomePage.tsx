@@ -1,6 +1,7 @@
 import { ArrowLeft } from 'lucide-react'
 import { Hero } from '@/components/marketing/Hero'
 import { WorksSection } from '@/components/marketing/WorksSection'
+import { Reveal } from '@/components/marketing/Reveal'
 import { AboutSummary, SoftwareTools, WhatIDo, WorkExperience } from '@/components/marketing/AboutSections'
 import { ContactSection } from '@/components/marketing/ContactSection'
 
@@ -12,8 +13,10 @@ export function HomePage() {
   return (
     <>
       <Hero showBody={false} />
-      <Hero.Body />
-      <WorksSection reveal={true} revealDelay={0.55} />
+      <Reveal delay={0.55}>
+        <Hero.Body reveal={false} />
+        <WorksSection reveal={false} />
+      </Reveal>
       <AboutSummary />
       <WhatIDo />
       <SoftwareTools />

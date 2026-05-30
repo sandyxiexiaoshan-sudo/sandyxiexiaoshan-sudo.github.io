@@ -70,26 +70,26 @@ export function Hero({ showBody = true }: { showBody?: boolean }) {
   )
 }
 
-function HeroBodyContent({ delay = 0 }: { delay?: number }) {
-  return (
-    <Reveal delay={delay}>
-      <div className="grid pt-[160px] pb-[160px] md:grid-cols-2 md:gap-x-4">
-        <div className="w-full text-left text-[20px] leading-snug text-white/85 md:col-start-2 md:pr-[150px]">
-          <div className="space-y-2">
-            {site.hero.paragraphs.map((p, i) => (
-              <p key={i}>{renderParagraph(p)}</p>
-            ))}
-          </div>
+function HeroBodyContent({ delay = 0, reveal = true }: { delay?: number; reveal?: boolean }) {
+  const content = (
+    <div className="grid pt-[160px] pb-[160px] md:grid-cols-2 md:gap-x-4">
+      <div className="w-full text-left text-[20px] leading-snug text-white/85 md:col-start-2 md:pr-[150px]">
+        <div className="space-y-2">
+          {site.hero.paragraphs.map((p, i) => (
+            <p key={i}>{renderParagraph(p)}</p>
+          ))}
         </div>
       </div>
-    </Reveal>
+    </div>
   )
+
+  return reveal ? <Reveal delay={delay}>{content}</Reveal> : content
 }
 
-function HeroBody() {
+function HeroBody({ reveal = true, delay = 0.55 }: { reveal?: boolean; delay?: number }) {
   return (
     <div className="mx-auto w-full max-w-[1882px] px-3 sm:px-5 md:px-8">
-      <HeroBodyContent delay={0.55} />
+      <HeroBodyContent delay={delay} reveal={reveal} />
     </div>
   )
 }

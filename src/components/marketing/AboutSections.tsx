@@ -3,6 +3,17 @@ import { site, projects } from '@/data/site'
 import { resume } from '@/data/resume'
 import { Reveal } from './Reveal'
 
+const personalDetails = [
+  { label: '姓名', value: '谢小珊' },
+  { label: '年龄', value: '38' },
+  { label: '学历', value: '本科' },
+  { label: '婚育', value: '已婚已育' },
+  { label: '居住地', value: '深圳' },
+  { label: '政治面貌', value: '党员' },
+  { label: '邮箱', value: 'sandyxiexiaoshan@gmail.com' },
+  { label: '电话', value: '13510104003' },
+]
+
 export function AboutSummary({
   showTopBorder = true,
   className = '',
@@ -12,21 +23,22 @@ export function AboutSummary({
 }) {
   return (
     <section className={`mx-auto max-w-[1882px] px-3 py-16 sm:px-5 md:px-8 ${showTopBorder ? 'border-t border-white/15' : ''} ${className}`}>
-      <Reveal>
-        <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
+      <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
+        <Reveal>
           <h2 className="section-label">About me</h2>
-          <div className="space-y-4 text-[20px] leading-snug text-white/85">
-            {site.aboutIntro.split('\n\n').map((group, groupIndex) => (
-              <div key={groupIndex} className="space-y-2">
-                {group.split('\n').map((paragraph, paragraphIndex) => (
-                  <p key={paragraphIndex}>{paragraph}</p>
-                ))}
+        </Reveal>
+        <div className="grid gap-x-8 gap-y-5 border-b border-white/15 pb-8 md:grid-cols-2">
+          {personalDetails.map((item, i) => (
+            <Reveal key={item.label} delay={i * 0.04}>
+              <div className={item.label === '邮箱' ? 'md:col-span-2' : undefined}>
+                <p className="text-sm uppercase tracking-[0.24em] text-white/35">{item.label}</p>
+                <p className="mt-2 break-words text-[20px] leading-snug text-white/85">{item.value}</p>
               </div>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
-      </Reveal>
-      <div className="mt-16 grid gap-8 md:grid-cols-2 md:gap-x-4">
+      </div>
+      <div className="mt-[30px] grid gap-8 md:grid-cols-2 md:gap-x-4">
         <div className="grid gap-6 md:col-start-2 md:grid-cols-[2fr_1fr] md:items-end md:gap-x-4">
           <Reveal delay={0.08}>
             <div className="aspect-[4/5] overflow-hidden bg-white/10">
@@ -50,7 +62,7 @@ export function AboutSummary({
           </Reveal>
         </div>
       </div>
-      <div className="mt-16 grid gap-8 pt-10 md:grid-cols-2 md:gap-x-4">
+      <div className="mt-[40px] grid gap-8 md:grid-cols-2 md:gap-x-4">
         <div className="grid grid-cols-3 gap-6 md:col-start-2 md:gap-12">
           {site.stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.06}>
