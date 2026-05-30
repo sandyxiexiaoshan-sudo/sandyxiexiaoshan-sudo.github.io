@@ -8,7 +8,7 @@ export const site = {
   tagline: 'UX Designer · Smart Hardware · Drone Industry',
   hero: {
     paragraphs: [
-      '我是一名拥有13年以上设计经验是资深 UX 设计师，擅长硬件端复杂交互与企业级产品设计，懂专业场景需求，注重数据驱动验证。',
+      '我是一名拥有多年行业经验的资深 UX 设计师，擅长硬件端复杂交互与企业级产品设计，懂专业场景需求，注重数据驱动验证。',
       '依托 **Vide Coding AI** 无代码开发模式，可独立完成从Figma定制设计、Cursor AI智能搭建到 GitHub 自动化部署的全链路落地，打破传统设计与开发的壁垒，实现创意从想法到线上上线的闭环',
     ],
   },

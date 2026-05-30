@@ -1,10 +1,6 @@
 import { Reveal } from './Reveal'
-import { useCopyEmail } from '@/hooks/useCopyEmail'
-import { site } from '@/data/site'
 
 export function ContactSection() {
-  const { copied, copy } = useCopyEmail()
-
   return (
     <section id="contact" className="mx-auto max-w-[1882px] border-t border-white/15 px-3 py-24 sm:px-5 md:px-8">
       <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
@@ -40,20 +36,6 @@ export function ContactSection() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.14} className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a
-              href={`mailto:${site.email}`}
-              className="text-xl font-medium text-[var(--color-accent)] underline-offset-4 hover:underline md:text-2xl"
-            >
-              {site.email}
-            </a>
-            <button type="button" onClick={copy} className="btn-secondary w-fit px-5 py-2.5">
-              {copied ? 'Copied' : 'Copy Email'}
-            </button>
-            <a href={site.resumePdfPath} download="sandy-resume.pdf" className="btn-primary w-fit px-5 py-2.5">
-              下载简历
-            </a>
-          </Reveal>
         </div>
       </div>
     </section>

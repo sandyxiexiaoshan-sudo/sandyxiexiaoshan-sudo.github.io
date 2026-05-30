@@ -1,6 +1,8 @@
+import { Check, Copy } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { site, projects } from '@/data/site'
 import { resume } from '@/data/resume'
+import { useCopyEmail } from '@/hooks/useCopyEmail'
 import { Reveal } from './Reveal'
 
 const personalDetails = [
@@ -21,18 +23,32 @@ export function AboutSummary({
   showTopBorder?: boolean
   className?: string
 }) {
+  const { copied, copy } = useCopyEmail()
+
   return (
     <section className={`mx-auto max-w-[1882px] px-3 py-16 sm:px-5 md:px-8 ${showTopBorder ? 'border-t border-white/15' : ''} ${className}`}>
       <div className="grid gap-8 md:grid-cols-2 md:gap-x-4">
         <Reveal>
           <h2 className="section-label">About me</h2>
         </Reveal>
-        <div className="grid gap-x-8 gap-y-5 border-b border-white/15 pb-8 md:grid-cols-2">
+        <div className="grid gap-x-10 gap-y-5 border-b border-white/15 pb-8 md:grid-cols-[minmax(0,1fr)_minmax(160px,1fr)]">
           {personalDetails.map((item, i) => (
             <Reveal key={item.label} delay={i * 0.04}>
               <div className={item.label === '邮箱' ? 'md:col-span-2' : undefined}>
                 <p className="text-sm uppercase tracking-[0.24em] text-white/35">{item.label}</p>
-                <p className="mt-2 break-words text-[20px] leading-snug text-white/85">{item.value}</p>
+                <div className="mt-2 flex min-w-0 items-center gap-3">
+                  <p className="min-w-0 break-words text-[20px] leading-snug text-white/85">{item.value}</p>
+                  {item.label === '邮箱' && (
+                    <button
+                      type="button"
+                      onClick={copy}
+                      aria-label={copied ? '邮箱已复制' : '复制邮箱'}
+                      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-white/35 hover:text-white"
+                    >
+                      {copied ? <Check size={15} /> : <Copy size={15} />}
+                    </button>
+                  )}
+                </div>
               </div>
             </Reveal>
           ))}
@@ -71,6 +87,13 @@ export function AboutSummary({
             </Reveal>
           ))}
         </div>
+      </div>
+      <div className="mt-[40px] grid gap-8 md:grid-cols-2 md:gap-x-4">
+        <Reveal delay={0.28} className="md:col-start-2">
+          <a href={site.resumePdfPath} download="sandy-resume.pdf" className="btn-primary w-fit px-5 py-2.5">
+            下载简历
+          </a>
+        </Reveal>
       </div>
     </section>
   )
