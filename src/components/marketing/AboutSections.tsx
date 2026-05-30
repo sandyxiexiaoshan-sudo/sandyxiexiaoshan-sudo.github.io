@@ -52,6 +52,11 @@ export function AboutSummary({
               </div>
             </Reveal>
           ))}
+          <Reveal delay={personalDetails.length * 0.04} className="mt-5 md:col-span-2">
+            <a href={site.resumePdfPath} download="sandy-resume.pdf" className="btn-primary w-fit px-5 py-2.5">
+              下载简历
+            </a>
+          </Reveal>
         </div>
       </div>
       <div className="mt-[30px] grid gap-8 md:grid-cols-2 md:gap-x-4">
@@ -87,13 +92,6 @@ export function AboutSummary({
             </Reveal>
           ))}
         </div>
-      </div>
-      <div className="mt-[40px] grid gap-8 md:grid-cols-2 md:gap-x-4">
-        <Reveal delay={0.28} className="md:col-start-2">
-          <a href={site.resumePdfPath} download="sandy-resume.pdf" className="btn-primary w-fit px-5 py-2.5">
-            下载简历
-          </a>
-        </Reveal>
       </div>
     </section>
   )
