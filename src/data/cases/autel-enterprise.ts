@@ -6,7 +6,7 @@ export const autelEnterprise: CaseStudy = {
   subtitle: '遥控器移动端飞行操控软件',
   year: '2025',
   coverImage: '/cases/autel-enterprise/00.png',
-  slides: Array.from({ length: 22 }, (_, index) => {
+  slides: Array.from({ length: 23 }, (_, index) => {
     const id = String(index).padStart(2, '0')
     return {
       id,
