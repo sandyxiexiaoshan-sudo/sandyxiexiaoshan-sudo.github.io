@@ -6,6 +6,7 @@ export const autelMapper: CaseStudy = {
   subtitle: 'PC 桌面端工具型软件',
   year: '2022',
   coverImage: '/cases/autel-mapper/00.png',
+  productLink: 'https://www.autelrobotics.cn/productdetail/autel-mapper/',
   slides: [
     { id: '00', nodeId: '1:4597', title: '23 Autel Mapper' },
     { id: '01', nodeId: '1:4539', title: '24 用户痛点' },

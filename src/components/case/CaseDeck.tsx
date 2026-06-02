@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ExternalLink } from 'lucide-react'
 import type { CaseStudy } from '@/types/case'
 import { projects } from '@/data/site'
 import { CaseSlide } from './CaseSlide'
@@ -65,9 +65,22 @@ export function CaseDeck({ study }: CaseDeckProps) {
         >
           <ArrowLeft size={16} /> 返回作品集
         </Link>
-        <h1 className="mt-6 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-          {study.title}
-        </h1>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
+            {study.title}
+          </h1>
+          {study.productLink && (
+            <a
+              href={study.productLink}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/75 transition hover:border-white/35 hover:text-white"
+            >
+              产品链接
+              <ExternalLink size={14} />
+            </a>
+          )}
+        </div>
         <p className="mt-2 text-[var(--color-text-muted)]">{cardSubtitle}</p>
       </div>
 

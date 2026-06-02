@@ -13,5 +13,6 @@ export interface CaseStudy {
   subtitle: string
   year: string
   coverImage: string
+  productLink?: string
   slides: CaseSlide[]
 }
