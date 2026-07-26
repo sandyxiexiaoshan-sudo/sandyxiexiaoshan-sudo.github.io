@@ -31,5 +31,5 @@ export function optimizedImagePath(src: string): string {
 }
 
 export function caseMediaDimensions(slug: string, slideId: string, fallback?: ImageDimensions): ImageDimensions {
-  return fallback ?? SPECIAL_CASE_DIMENSIONS[`${slug}/${slideId}`] ?? DEFAULT_WIDE_DIMENSIONS
+  return SPECIAL_CASE_DIMENSIONS[`${slug}/${slideId}`] ?? fallback ?? DEFAULT_WIDE_DIMENSIONS
 }
