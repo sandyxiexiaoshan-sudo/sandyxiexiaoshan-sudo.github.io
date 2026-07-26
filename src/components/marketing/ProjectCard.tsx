@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { optimizedImagePath } from '@/utils/media'
+import { thumbnailImagePath } from '@/utils/media'
 
 type ProjectCardProps = {
   slug: string
@@ -11,7 +11,7 @@ type ProjectCardProps = {
 }
 
 export function ProjectCard({ slug, title, subtitle, year, coverImage, priority = false }: ProjectCardProps) {
-  const optimizedCoverImage = optimizedImagePath(coverImage)
+  const thumbnailCoverImage = thumbnailImagePath(coverImage)
 
   return (
     <article className="group">
@@ -29,7 +29,7 @@ export function ProjectCard({ slug, title, subtitle, year, coverImage, priority 
         </div>
         <div className="relative aspect-video overflow-hidden bg-white/5">
           <img
-            src={optimizedCoverImage}
+            src={thumbnailCoverImage}
             alt={title}
             className={`h-full w-full object-cover transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.066] ${
               slug === 'web' ? 'object-top' : ''
