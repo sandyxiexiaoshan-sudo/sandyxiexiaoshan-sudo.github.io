@@ -4,12 +4,6 @@
 /optimized/*
   Cache-Control: public, max-age=31536000, immutable
 
-/responsive/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/thumbs/*
-  Cache-Control: public, max-age=31536000, immutable
-
 /cases/*
   Cache-Control: public, max-age=31536000, immutable
 

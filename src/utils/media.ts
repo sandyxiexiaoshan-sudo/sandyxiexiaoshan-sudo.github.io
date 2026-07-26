@@ -1,6 +1,4 @@
 const OPTIMIZED_IMAGE_EXTENSIONS = /\.(png|jpe?g)$/i
-const CASE_IMAGE_PATH = /^\/cases\/(.+)\.(png|jpe?g)$/i
-const RESPONSIVE_IMAGE_WIDTHS = [900, 1400, 1800] as const
 
 type ImageDimensions = {
   width: number
@@ -24,37 +22,12 @@ const SPECIAL_CASE_DIMENSIONS: Record<string, ImageDimensions> = {
   'web/05': { width: 1800, height: 1775 },
 }
 
-function caseImageStem(src: string): string | undefined {
-  return src.match(CASE_IMAGE_PATH)?.[1]
-}
-
 export function optimizedImagePath(src: string): string {
-  const stem = caseImageStem(src)
-
-  if (stem) {
-    return `/optimized/cases/${stem}.jpg`
-  }
-
   if (!OPTIMIZED_IMAGE_EXTENSIONS.test(src) || src.startsWith('/optimized/')) {
     return src
   }
 
   return `/optimized${src.replace(OPTIMIZED_IMAGE_EXTENSIONS, '.jpg')}`
-}
-
-export function thumbnailImagePath(src: string): string {
-  const stem = caseImageStem(src)
-  return stem ? `/thumbs/cases/${stem}.jpg` : optimizedImagePath(src)
-}
-
-export function responsiveImageSrcSet(src: string): string | undefined {
-  const stem = caseImageStem(src)
-
-  if (!stem) {
-    return undefined
-  }
-
-  return RESPONSIVE_IMAGE_WIDTHS.map((width) => `/responsive/cases/${stem}-${width}.jpg ${width}w`).join(', ')
 }
 
 export function caseMediaDimensions(slug: string, slideId: string, fallback?: ImageDimensions): ImageDimensions {

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CaseSlide as CaseSlideType } from '@/types/case'
 import { slideImagePath } from '@/data/cases'
-import { caseMediaDimensions, optimizedImagePath, responsiveImageSrcSet } from '@/utils/media'
+import { caseMediaDimensions, optimizedImagePath } from '@/utils/media'
 
 type CaseSlideProps = {
   slug: string
@@ -18,7 +18,6 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
   const src = slide.imagePath ?? slideImagePath(slug, slide.id)
   const isVideo = /\.(mp4|webm|mov)$/i.test(src)
   const imageSrc = isVideo ? src : optimizedImagePath(src)
-  const imageSrcSet = isVideo ? undefined : responsiveImageSrcSet(src)
   const shouldLoadEagerly = index === 0
   const fallbackDimensions = slide.width && slide.height ? { width: slide.width, height: slide.height } : undefined
   const dimensions = caseMediaDimensions(slug, slide.id, fallbackDimensions)
@@ -78,8 +77,6 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
             ) : (
               <img
                 src={imageSrc}
-                srcSet={imageSrcSet}
-                sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1280px) calc(100vw - 64px), 1600px"
                 alt={slideLabel}
                 width={dimensions.width}
                 height={dimensions.height}

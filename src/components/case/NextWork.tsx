@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import type { CaseStudy } from '@/types/case'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
-import { thumbnailImagePath } from '@/utils/media'
+import { optimizedImagePath } from '@/utils/media'
 
 type NextWorkProps = {
   nextStudy: CaseStudy
@@ -11,7 +11,7 @@ type NextWorkProps = {
 
 export function NextWork({ nextStudy }: NextWorkProps) {
   const reduced = useReducedMotion()
-  const nextCoverImage = thumbnailImagePath(nextStudy.coverImage)
+  const nextCoverImage = optimizedImagePath(nextStudy.coverImage)
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
