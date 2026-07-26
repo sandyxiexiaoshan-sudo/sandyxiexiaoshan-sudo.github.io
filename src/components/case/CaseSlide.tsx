@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CaseSlide as CaseSlideType } from '@/types/case'
 import { slideImagePath } from '@/data/cases'
-import { optimizedImagePath } from '@/utils/media'
+import { caseMediaDimensions, optimizedImagePath } from '@/utils/media'
 
 type CaseSlideProps = {
   slug: string
@@ -13,15 +13,42 @@ type CaseSlideProps = {
 export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) {
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
+  const [shouldRenderMedia, setShouldRenderMedia] = useState(index === 0)
+  const sectionRef = useRef<HTMLElement>(null)
   const src = slide.imagePath ?? slideImagePath(slug, slide.id)
   const isVideo = /\.(mp4|webm|mov)$/i.test(src)
   const imageSrc = isVideo ? src : optimizedImagePath(src)
-  const shouldLoadEagerly = index < 2
+  const shouldLoadEagerly = index === 0
+  const fallbackDimensions = slide.width && slide.height ? { width: slide.width, height: slide.height } : undefined
+  const dimensions = caseMediaDimensions(slug, slide.id, fallbackDimensions)
+  const aspectRatio = `${dimensions.width} / ${dimensions.height}`
+
+  useEffect(() => {
+    if (index === 0 || shouldRenderMedia) return
+
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+
+        setShouldRenderMedia(true)
+        observer.disconnect()
+      },
+      { rootMargin: '450px 0px' },
+    )
+
+    observer.observe(section)
+
+    return () => observer.disconnect()
+  }, [index, shouldRenderMedia])
 
   const slideLabel = `${projectTitle} · ${String(index + 1).padStart(2, '0')}`
 
   return (
     <section
+      ref={sectionRef}
       id={`slide-${slide.id}`}
       className="scroll-mt-20 snap-start px-4 py-6 md:px-8 md:py-10"
       aria-label={slideLabel}
@@ -29,13 +56,14 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
       <div className="mx-auto max-w-[1600px]">
         <div
           id={`slide-image-${slide.id}`}
-          className="relative overflow-hidden rounded-lg border border-white/10 bg-[var(--color-card-bg)] shadow-2xl"
+          style={{ aspectRatio }}
+          className="relative overflow-hidden rounded-lg border border-white/10 bg-[var(--color-card-bg)] shadow-2xl [content-visibility:auto] [contain-intrinsic-size:900px]"
         >
-          {!failed ? (
+          {shouldRenderMedia && !failed ? (
             isVideo ? (
               <video
                 src={src}
-                className={`block h-auto w-full transition-opacity duration-300 ${
+                className={`block h-full w-full object-contain transition-opacity duration-300 ${
                   loaded ? 'opacity-100' : 'opacity-0'
                 }`}
                 autoPlay
@@ -50,7 +78,9 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
               <img
                 src={imageSrc}
                 alt={slideLabel}
-                className={`block h-auto w-full transition-opacity duration-300 ${
+                width={dimensions.width}
+                height={dimensions.height}
+                className={`block h-full w-full object-contain transition-opacity duration-300 ${
                   loaded ? 'opacity-100' : 'opacity-0'
                 }`}
                 loading={shouldLoadEagerly ? 'eager' : 'lazy'}

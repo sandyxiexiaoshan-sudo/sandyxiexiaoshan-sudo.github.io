@@ -85,7 +85,7 @@ export function CaseDeck({ study }: CaseDeckProps) {
       <div className="mt-8 snap-y snap-proximity">
         {study.slides.map((slide, index) => (
           <CaseSlide
-            key={slide.id}
+            key={`${study.slug}-${slide.id}`}
             slug={study.slug}
             slide={slide}
             index={index}

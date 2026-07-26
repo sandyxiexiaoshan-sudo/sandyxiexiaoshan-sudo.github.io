@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import type { CaseStudy } from '@/types/case'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { optimizedImagePath } from '@/utils/media'
 
 type NextWorkProps = {
   nextStudy: CaseStudy
@@ -10,6 +11,7 @@ type NextWorkProps = {
 
 export function NextWork({ nextStudy }: NextWorkProps) {
   const reduced = useReducedMotion()
+  const nextCoverImage = optimizedImagePath(nextStudy.coverImage)
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -47,10 +49,19 @@ export function NextWork({ nextStudy }: NextWorkProps) {
 
             <div className="group/thumb relative aspect-video w-full overflow-hidden bg-white/5 [backface-visibility:hidden]">
               <img
-                src={nextStudy.coverImage}
+                src={nextCoverImage}
                 alt={nextStudy.title}
                 className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover/thumb:scale-[1.02]"
                 loading="lazy"
+                decoding="async"
+                fetchPriority="low"
+                onError={(e) => {
+                  const t = e.currentTarget
+
+                  if (t.src !== new URL(nextStudy.coverImage, window.location.href).href) {
+                    t.src = nextStudy.coverImage
+                  }
+                }}
               />
               <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover/thumb:opacity-100">
                 <span className="rounded-md border border-white/15 bg-black/45 px-5 py-3 text-sm font-medium text-white shadow-lg backdrop-blur-md">
