@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "images:webp": "node scripts/convert-images-to-webp.mjs",
+    "images:webp:clean": "node scripts/convert-images-to-webp.mjs --clean",
     "sync:figma": "node scripts/sync-figma-assets.mjs"
   },
   "dependencies": {

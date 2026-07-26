@@ -68,6 +68,7 @@ export function AboutSummary({
                 alt="Sandy Xie portrait"
                 className="h-full w-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </Reveal>
@@ -78,6 +79,7 @@ export function AboutSummary({
                 alt="Selected design illustration"
                 className="h-full w-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </Reveal>
@@ -148,7 +150,13 @@ export function SoftwareTools() {
             <Reveal key={tool.name} delay={i * 0.035}>
               <div className="flex w-fit flex-col items-center gap-3 text-center">
                 <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-[18px] border border-white/10 bg-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur">
-                  <img src={tool.icon} alt={`${tool.name} icon`} className="h-full w-full object-cover" loading="lazy" />
+                  <img
+                    src={tool.icon}
+                    alt={`${tool.name} icon`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <p className="text-sm text-white/60">{tool.name}</p>
               </div>

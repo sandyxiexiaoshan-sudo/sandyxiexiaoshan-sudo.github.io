@@ -42,7 +42,7 @@ export function DownloadButton({ className = '' }: { className?: string }) {
           </style>
         </head>
         <body>
-          <img src="${site.resumePdfPath}" alt="Sandy Xie 简历" />
+          <img src="${site.resumePdfPath}" alt="Sandy Xie 简历" loading="lazy" decoding="async" />
           <script>
             const image = document.querySelector('img');
             image.addEventListener('load', () => {

@@ -27,6 +27,8 @@ export function ResumeView() {
               src={resume.avatar}
               alt={resume.name}
               className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 e.currentTarget.style.display = 'none'
               }}

@@ -25,6 +25,7 @@ export function ContactSection() {
                   alt="微信二维码"
                   className="aspect-square w-full object-cover"
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     const image = e.currentTarget
                     image.style.display = 'none'
