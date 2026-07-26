@@ -6,7 +6,7 @@ export const web: CaseStudy = {
   subtitle: '网页视觉设计',
   year: '2013',
   coverImage: '/cases/web/00.jpeg',
-  slides: ['00.jpeg', '01.jpeg', '02.jpeg', '03.jpeg'].map((fileName, index) => ({
+  slides: ['00.jpeg', '01.jpeg', '04.jpeg', '05.jpeg'].map((fileName, index) => ({
     id: String(index).padStart(2, '0'),
     nodeId: `web:${index}`,
     title: `网页设计 ${String(index + 1).padStart(2, '0')}`,

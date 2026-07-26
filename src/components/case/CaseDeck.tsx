@@ -6,7 +6,8 @@ import { projects } from '@/data/site'
 import { CaseSlide } from './CaseSlide'
 import { CaseProgressNav } from './CaseProgressNav'
 import { NextWork } from './NextWork'
-import { caseStudies, caseStudyList } from '@/data/cases'
+import { caseStudies, caseStudyList, slideImagePath } from '@/data/cases'
+import { preloadImage } from '@/utils/media'
 
 const nextWorkOverrides: Record<string, string> = {
   'autel-hcjc': 'Smile to u',
@@ -33,6 +34,17 @@ export function CaseDeck({ study }: CaseDeckProps) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    const activeIndex = study.slides.findIndex((slide) => slide.id === activeId)
+    if (activeIndex < 0) return
+
+    study.slides.slice(Math.max(0, activeIndex - 1), activeIndex + 4).forEach((slide) => {
+      const src = slide.imagePath ?? slideImagePath(study.slug, slide.id)
+      if (/\.(mp4|webm|mov)$/i.test(src)) return
+      preloadImage(src)
+    })
+  }, [activeId, study.slug, study.slides])
 
   useEffect(() => {
     const ids = study.slides.map((s) => s.id)

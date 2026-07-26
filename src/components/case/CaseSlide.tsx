@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CaseSlide as CaseSlideType } from '@/types/case'
 import { slideImagePath } from '@/data/cases'
-import { caseMediaDimensions } from '@/utils/media'
+import { caseMediaDimensions, cdnImagePath } from '@/utils/media'
 
 type CaseSlideProps = {
   slug: string
@@ -17,7 +17,7 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
   const sectionRef = useRef<HTMLElement>(null)
   const src = slide.imagePath ?? slideImagePath(slug, slide.id)
   const isVideo = /\.(mp4|webm|mov)$/i.test(src)
-  const imageSrc = src
+  const [imageSrc, setImageSrc] = useState(() => cdnImagePath(src))
   const shouldLoadEagerly = index === 0
   const fallbackDimensions = slide.width && slide.height ? { width: slide.width, height: slide.height } : undefined
   const dimensions = caseMediaDimensions(slug, slide.id, fallbackDimensions)
@@ -36,7 +36,7 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
         setShouldRenderMedia(true)
         observer.disconnect()
       },
-      { rootMargin: '450px 0px' },
+      { rootMargin: '1600px 0px' },
     )
 
     observer.observe(section)
@@ -87,7 +87,14 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
                 decoding="async"
                 fetchPriority={shouldLoadEagerly ? 'high' : 'low'}
                 onLoad={() => setLoaded(true)}
-                onError={() => setFailed(true)}
+                onError={() => {
+                  if (imageSrc !== src) {
+                    setImageSrc(src)
+                    return
+                  }
+
+                  setFailed(true)
+                }}
               />
             )
           ) : null}

@@ -1,4 +1,6 @@
 const OPTIMIZED_IMAGE_EXTENSIONS = /\.(png|jpe?g)$/i
+const CDN_BASE_URL = 'https://cdn.jsdelivr.net/gh/sandyxiexiaoshan-sudo/sandyxiexiaoshan-sudo.github.io@main'
+const CDN_ELIGIBLE_PATHS = ['/cases/', '/resume/', '/optimized/', '/webp/']
 
 type ImageDimensions = {
   width: number
@@ -20,6 +22,22 @@ const SPECIAL_CASE_DIMENSIONS: Record<string, ImageDimensions> = {
   'web/01': { width: 1106, height: 1800 },
   'web/04': { width: 716, height: 1800 },
   'web/05': { width: 1800, height: 1775 },
+}
+
+export function cdnImagePath(src: string): string {
+  if (!src.startsWith('/') || !CDN_ELIGIBLE_PATHS.some((path) => src.startsWith(path))) {
+    return src
+  }
+
+  return encodeURI(`${CDN_BASE_URL}${src}`)
+}
+
+export function preloadImage(src: string): void {
+  if (typeof window === 'undefined') return
+
+  const image = new Image()
+  image.decoding = 'async'
+  image.src = cdnImagePath(src)
 }
 
 export function optimizedImagePath(src: string): string {
