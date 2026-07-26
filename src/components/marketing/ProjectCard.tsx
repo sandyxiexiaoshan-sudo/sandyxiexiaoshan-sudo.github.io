@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { optimizedImagePath } from '@/utils/media'
 
 type ProjectCardProps = {
   slug: string
@@ -6,9 +7,12 @@ type ProjectCardProps = {
   subtitle: string
   year: string
   coverImage: string
+  priority?: boolean
 }
 
-export function ProjectCard({ slug, title, subtitle, year, coverImage }: ProjectCardProps) {
+export function ProjectCard({ slug, title, subtitle, year, coverImage, priority = false }: ProjectCardProps) {
+  const optimizedCoverImage = optimizedImagePath(coverImage)
+
   return (
     <article className="group">
       <Link to={`/works/${slug}`} className="block text-white" data-cursor="view">
@@ -25,14 +29,22 @@ export function ProjectCard({ slug, title, subtitle, year, coverImage }: Project
         </div>
         <div className="relative aspect-video overflow-hidden bg-white/5">
           <img
-            src={coverImage}
+            src={optimizedCoverImage}
             alt={title}
             className={`h-full w-full object-cover transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.066] ${
               slug === 'web' ? 'object-top' : ''
             }`}
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchPriority={priority ? 'high' : 'low'}
             onError={(e) => {
               const t = e.currentTarget
+
+              if (t.src !== new URL(coverImage, window.location.href).href) {
+                t.src = coverImage
+                return
+              }
+
               t.style.display = 'none'
               t.parentElement?.classList.add('bg-white/10')
             }}

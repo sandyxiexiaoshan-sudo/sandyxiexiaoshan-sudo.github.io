@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { CaseSlide } from '@/types/case'
 
 type CaseProgressNavProps = {
@@ -9,11 +9,8 @@ type CaseProgressNavProps = {
 export function CaseProgressNav({ slides, activeId }: CaseProgressNavProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [activeId])
-
   const scrollTo = (id: string) => {
+    setMobileOpen(false)
     const target = document.getElementById(`slide-image-${id}`) ?? document.getElementById(`slide-${id}`)
     if (!target) return
 

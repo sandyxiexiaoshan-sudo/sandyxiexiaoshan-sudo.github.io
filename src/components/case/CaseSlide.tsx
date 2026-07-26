@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { CaseSlide as CaseSlideType } from '@/types/case'
 import { slideImagePath } from '@/data/cases'
+import { optimizedImagePath } from '@/utils/media'
 
 type CaseSlideProps = {
   slug: string
@@ -14,6 +15,8 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
   const [failed, setFailed] = useState(false)
   const src = slide.imagePath ?? slideImagePath(slug, slide.id)
   const isVideo = /\.(mp4|webm|mov)$/i.test(src)
+  const imageSrc = isVideo ? src : optimizedImagePath(src)
+  const shouldLoadEagerly = index < 2
 
   const slideLabel = `${projectTitle} · ${String(index + 1).padStart(2, '0')}`
 
@@ -39,20 +42,31 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
                 loop
                 muted
                 playsInline
-                preload={index < 2 ? 'auto' : 'metadata'}
+                preload={shouldLoadEagerly ? 'metadata' : 'none'}
                 onLoadedData={() => setLoaded(true)}
                 onError={() => setFailed(true)}
               />
             ) : (
               <img
-                src={src}
+                src={imageSrc}
                 alt={slideLabel}
                 className={`block h-auto w-full transition-opacity duration-300 ${
                   loaded ? 'opacity-100' : 'opacity-0'
                 }`}
-                loading={index < 2 ? 'eager' : 'lazy'}
+                loading={shouldLoadEagerly ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={shouldLoadEagerly ? 'high' : 'low'}
                 onLoad={() => setLoaded(true)}
-                onError={() => setFailed(true)}
+                onError={(e) => {
+                  const t = e.currentTarget
+
+                  if (t.src !== new URL(src, window.location.href).href) {
+                    t.src = src
+                    return
+                  }
+
+                  setFailed(true)
+                }}
               />
             )
           ) : null}

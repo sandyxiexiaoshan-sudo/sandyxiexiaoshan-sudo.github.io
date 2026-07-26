@@ -20,7 +20,9 @@ type CaseDeckProps = {
 }
 
 export function CaseDeck({ study }: CaseDeckProps) {
-  const [activeId, setActiveId] = useState(study.slides[0]?.id ?? '')
+  const firstSlideId = study.slides[0]?.id ?? ''
+  const [activeSlide, setActiveSlide] = useState({ slug: study.slug, id: firstSlideId })
+  const activeId = activeSlide.slug === study.slug ? activeSlide.id : firstSlideId
   const currentIndex = caseStudyList.findIndex((item) => item.slug === study.slug)
   const cardSubtitle = projects.find((project) => project.slug === study.slug)?.subtitle ?? study.subtitle
   const overrideNextSlug = nextWorkOverrides[study.slug]
@@ -33,10 +35,6 @@ export function CaseDeck({ study }: CaseDeckProps) {
   }
 
   useEffect(() => {
-    setActiveId(study.slides[0]?.id ?? '')
-  }, [study.slug, study.slides])
-
-  useEffect(() => {
     const ids = study.slides.map((s) => s.id)
     const observers: IntersectionObserver[] = []
 
@@ -45,7 +43,7 @@ export function CaseDeck({ study }: CaseDeckProps) {
       if (!el) return
       const obs = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) setActiveId(id)
+          if (entry.isIntersecting) setActiveSlide({ slug: study.slug, id })
         },
         { rootMargin: '-40% 0px -40% 0px', threshold: 0 },
       )
@@ -54,7 +52,7 @@ export function CaseDeck({ study }: CaseDeckProps) {
     })
 
     return () => observers.forEach((o) => o.disconnect())
-  }, [study.slides])
+  }, [study.slug, study.slides])
 
   return (
     <div className="pb-24">

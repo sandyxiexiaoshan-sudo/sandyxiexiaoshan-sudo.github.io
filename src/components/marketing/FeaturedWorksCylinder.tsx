@@ -12,7 +12,7 @@ export function FeaturedWorksCylinder({ projects }: FeaturedWorksCylinderProps) 
 
   return (
     <div className="grid gap-x-[1.333rem] gap-y-[3.333rem] md:grid-cols-2">
-      {featuredProjects.map((project) => (
+      {featuredProjects.map((project, index) => (
         <ProjectCard
           key={project.slug}
           slug={project.slug}
@@ -20,6 +20,7 @@ export function FeaturedWorksCylinder({ projects }: FeaturedWorksCylinderProps) 
           subtitle={project.subtitle}
           year={project.year}
           coverImage={project.coverImage}
+          priority={index < 2}
         />
       ))}
     </div>
