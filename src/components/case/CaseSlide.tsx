@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CaseSlide as CaseSlideType } from '@/types/case'
 import { slideImagePath } from '@/data/cases'
-import { caseMediaDimensions, cdnImagePath } from '@/utils/media'
+import { caseMediaDimensions, cdnImagePath, optimizedImagePath } from '@/utils/media'
 
 type CaseSlideProps = {
   slug: string
@@ -17,11 +17,44 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
   const sectionRef = useRef<HTMLElement>(null)
   const src = slide.imagePath ?? slideImagePath(slug, slide.id)
   const isVideo = /\.(mp4|webm|mov)$/i.test(src)
-  const [imageSrc, setImageSrc] = useState(() => cdnImagePath(src))
+  const previewSrc = isVideo ? src : optimizedImagePath(src)
+  const fullSrc = isVideo ? src : cdnImagePath(src)
+  const [imageSrc, setImageSrc] = useState(previewSrc)
+  const [fullImageReady, setFullImageReady] = useState(isVideo)
   const shouldLoadEagerly = index === 0
   const fallbackDimensions = slide.width && slide.height ? { width: slide.width, height: slide.height } : undefined
   const dimensions = caseMediaDimensions(slug, slide.id, fallbackDimensions)
   const aspectRatio = `${dimensions.width} / ${dimensions.height}`
+
+  useEffect(() => {
+    if (!shouldRenderMedia || isVideo) return
+
+    let cancelled = false
+    const fullImage = new Image()
+    fullImage.decoding = 'async'
+    fullImage.src = fullSrc
+    fullImage.onload = () => {
+      if (cancelled) return
+      setImageSrc(fullSrc)
+      setFullImageReady(true)
+    }
+    fullImage.onerror = () => {
+      if (cancelled || fullSrc === src) return
+
+      const fallbackImage = new Image()
+      fallbackImage.decoding = 'async'
+      fallbackImage.src = src
+      fallbackImage.onload = () => {
+        if (cancelled) return
+        setImageSrc(src)
+        setFullImageReady(true)
+      }
+    }
+
+    return () => {
+      cancelled = true
+    }
+  }, [fullSrc, isVideo, shouldRenderMedia, src])
 
   useEffect(() => {
     if (index === 0 || shouldRenderMedia) return
@@ -80,6 +113,7 @@ export function CaseSlide({ slug, slide, index, projectTitle }: CaseSlideProps) 
                 alt={slideLabel}
                 width={dimensions.width}
                 height={dimensions.height}
+                data-quality={fullImageReady ? 'full' : 'preview'}
                 className={`block h-full w-full object-contain transition-opacity duration-300 ${
                   loaded ? 'opacity-100' : 'opacity-0'
                 }`}

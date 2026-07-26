@@ -35,9 +35,13 @@ export function cdnImagePath(src: string): string {
 export function preloadImage(src: string): void {
   if (typeof window === 'undefined') return
 
-  const image = new Image()
-  image.decoding = 'async'
-  image.src = cdnImagePath(src)
+  const preview = new Image()
+  preview.decoding = 'async'
+  preview.src = optimizedImagePath(src)
+
+  const full = new Image()
+  full.decoding = 'async'
+  full.src = cdnImagePath(src)
 }
 
 export function optimizedImagePath(src: string): string {
